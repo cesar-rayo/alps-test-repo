@@ -1,0 +1,20 @@
+ersion: 1.0
+service_name: ci-az-pub
+
+stages:
+  #basic running for tests in PR
+  - name: run_tests
+    when:
+      - cli: start
+      - pull_request
+      - pull_request:
+          trigger_phrase: test it
+    # codebuild run in us-east-1, so less traffic
+    image: 948063967832.dkr.ecr.us-east-1.amazonaws.com/makeincl:latest
+    compute_size: medium
+    commands:
+      - ls -la
+      - git clone git@algithub.pd.alertlogic.net:alertlogic/al-ps-tools.git
+      - sh ./al-ps-tools/helpers/coverage.sh
+    outputs:
+      file: ./.ps_outputs/*

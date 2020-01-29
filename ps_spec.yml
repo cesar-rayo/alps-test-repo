@@ -13,8 +13,8 @@ stages:
     image: 948063967832.dkr.ecr.us-east-1.amazonaws.com/makeincl:latest
     compute_size: medium
     commands:
-      - ls -la
       - git clone git@algithub.pd.alertlogic.net:alertlogic/al-ps-tools.git
       - sh ./al-ps-tools/helpers/coverage.sh
+      - ls -la
     outputs:
       file: ./.ps_outputs/*
